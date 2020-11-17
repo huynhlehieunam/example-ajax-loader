@@ -1,0 +1,25 @@
+<?php /** @var Magenest\LoadingScreen\Block\Ajax $block */ ?>
+<div id="send-ajax-form">
+	<button class="send-ajax-button">
+        <?= __("Send Ajax") ?>
+	</button>
+	<div class="msg">
+
+	</div>
+</div>
+<script>
+    require(["jquery"], function ($) {
+        $(".send-ajax-button").click(function (event) {
+            event.preventDefault();
+            let url = "<?= $block->getUrl("ajax/ajax/test") ?>";
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                showLoader: true
+            }).done(function (data){
+                $(".msg").text(data.msg);
+            })
+        })
+    })
+</script>
